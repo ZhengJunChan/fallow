@@ -7,10 +7,22 @@
     	</div>
 
     	<div class="main_box">
-    		<div>
-    			<div></div>
-    			<div></div>
-    		</div>
+        <div class="login_form">
+    			<div class="input_label">
+            <input type="text" placeholder="请输入您的账号">   
+          </div>
+    			<div class="input_label">
+            <input type="password" placeholder="请输入您的密码">
+          </div>
+          <div class="forget_password">
+            <!-- <router-link to="/">忘记密码</router-link> -->
+          </div>
+          <div class="submit_label">
+            <button>登录</button>
+          </div>
+        </div>
+
+        <div></div>
     	</div>
 
     	<div class="bottom_tip"></div>
@@ -25,7 +37,9 @@ import { relationInfo } from '@/data'
 export default {
   data () {
     return {
-      relationInfo
+      relationInfo,
+      account: '',
+      password: ''
     }
   },
   created () {
