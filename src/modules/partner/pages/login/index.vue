@@ -7,18 +7,23 @@
     	</div>
 
     	<div class="main_box">
+        <p class="error_label" v-show="errorTip">
+          <i class="iconfont icon-warming"></i>
+          <span v-text="errorTip"></span>
+        </p>
+
         <div class="login_form">
     			<div class="input_label">
-            <input type="text" placeholder="请输入您的账号">   
+            <input v-model="account" type="text" placeholder="请输入您的账号">   
           </div>
     			<div class="input_label">
-            <input type="password" placeholder="请输入您的密码">
+            <input v-model="password" type="password" placeholder="请输入您的密码">
           </div>
           <div class="forget_password">
             <!-- <router-link to="/">忘记密码</router-link> -->
           </div>
           <div class="submit_label">
-            <button>登录</button>
+            <button @click="login">登录</button>
           </div>
         </div>
 
@@ -31,19 +36,35 @@
 </template>
 
 <script type="text/javascript">
+import { RouterUtil } from '@/utils'
 import { relationInfo } from '@/data'
-// import defualt from './defualt.js';
 
 export default {
   data () {
     return {
       relationInfo,
       account: '',
-      password: ''
+      password: '',
+      errorTip: ''
     }
   },
-  created () {
-    console.log(relationInfo)
+  methods: {
+    login () {
+      this.errorTip = ''
+
+      if (!this.account) {
+        this.errorTip = '账号不能为空'
+        return
+      }
+
+      if (!this.password) {
+        this.errorTip = '密码不能为空'
+        return
+      }
+
+      // todo: 请求后端登录接口
+      RouterUtil.go('/', this.$router)
+    }
   }
 }
 </script>
